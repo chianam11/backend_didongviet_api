@@ -1,0 +1,132 @@
+<%- include('../alerts/alerts.ejs') %>
+
+<div class="h-fit">
+  <div class="bg-opacity-50">
+    <div class="rounded-lg shadow-xl relative">
+      <div class="p-6 overflow-y-scroll">
+        <h2 class="text-2xl font-bold mb-4">Tạo mới sản phẩm</h2>
+
+        <form class="space-y-4" enctype="multipart/form-data" method="post">
+          
+          <!-- Tên sản phẩm -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">
+              Tên sản phẩm: <span class="text-red-400"><%= req.errors.name %></span>
+            </label>
+            <input
+              type="text"
+              name="name"
+              maxlength="254"
+              value="<%= req.old && req.old.name ? req.old.name : '' %>"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          <!-- Mô tả sản phẩm -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">
+              Mô tả sản phẩm: <span class="text-red-400"><%= req.errors.description %></span>
+            </label>
+            <textarea
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              rows="3"
+              name="description"
+            ><%= req.old && req.old.description ? req.old.description : '' %></textarea>
+          </div>
+
+          <!-- Giá tiền & Số lượng -->
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                Giá tiền: <span class="text-red-400"><%= req.errors.price %></span>
+              </label>
+              <input
+                name="price"
+                type="number"
+                value="<%= req.old && req.old.price ? req.old.price : '' %>"
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">
+                Số lượng sản phẩm: <span class="text-red-400"><%= req.errors.stock %></span>
+              </label>
+              <input
+                type="number"
+                name="stock"
+                value="<%= req.old && req.old.stock ? req.old.stock : '' %>"
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+          </div>
+
+          <!-- Danh mục sản phẩm -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">
+              Danh mục sản phẩm: <span class="text-red-400"><%= req.errors.category_id %></span>
+            </label>
+            <select name="category_id" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+              <option value="">Chọn danh mục sản phẩm</option>
+              <% categoryData.forEach(function(category) { %>
+                <option value="<%= category.id %>" <%= category.id == req.old.category_id ? "selected" : "" %> >
+                  <%= category.name %>
+                </option>
+              <% }); %>
+            </select>
+          </div>
+
+          <!-- Nhãn hàng sản phẩm -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">
+              Nhãn hàng sản phẩm: <span class="text-red-400"><%= req.errors.brand_id %></span>
+            </label>
+            <select name="brand_id" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+              <option value="">Chọn nhãn hàng</option>
+              <% brandData.forEach(function(brand) { %>
+                <option value="<%= brand.id %>" <%= brand.id == req.old.brand_id ? "selected" : "" %>><%= brand.name %></option>
+              <% }); %>
+            </select>
+          </div>
+
+          <!-- Ảnh chính sản phẩm -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Ảnh chính sản phẩm</label>
+            <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+              <div class="space-y-1 text-center">
+               
+                <div class="flex text-sm flex-col text-gray-600">
+                  <label class="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500">
+                    <span>Upload a file</span>
+                    <input name="product_image" type="file" accept="image/*" required/>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ảnh phụ sản phẩm -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Ảnh phụ sản phẩm</label>
+            <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+              <div class="space-y-1 text-center">
+               
+                <div class="flex flex-col text-sm text-gray-600">
+                  <label class="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500">
+                    <span>Upload files</span>
+                    <input name="product_images" type="file" accept="image/*" multiple required/>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Submit -->
+          <button type="submit" class="w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
+            Tạo sản phẩm
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

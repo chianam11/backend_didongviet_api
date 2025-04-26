@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/stylesheets/reset.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/tailwind.css">
+    <script src="/javascripts/users.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+</head>
+<body>
+
+
+      
+
+    <div class="grid grid-cols-12 grid-rows-2">
+    
+
+        <div class="row-span-full col-span-2 min-h-[100%] bg-white shadow-xl">
+             <%- include ./header/header.ejs %>
+        </div>
+         
+         <main class="row-span-full col-span-10 p-5"> 
+             <%- include ./header/navbar.ejs %>
+            <div class=" relative border-4 border-indigo-600 w-full">
+              
+                <%- body %>
+            </div>
+         
+         </main>
+    </div>
+  
+   
+</body>
+</html>

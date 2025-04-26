@@ -1,0 +1,141 @@
+<%- include('../alerts/alerts.ejs') %>
+<h1 class="text-3xl font-semibold mb-6">Sửa vai trò</h1>
+<form action="" method="post" class="space-y-6">
+  <!-- Tên -->
+  <div class="mb-4">
+    <label for="name" class="block text-lg font-medium mb-2">Tên</label>
+    <input
+      type="text"
+      name="name"
+      id="name"
+      class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+      placeholder="Tên..."
+      value="<%= role.name %>"
+    />
+  </div>
+
+  <!-- Quyền -->
+  <div class="mb-6">
+    <table class="min-w-full table-auto border-separate border-spacing-2">
+      <thead>
+        <tr class="text-left text-lg">
+          <th class="px-4 py-2 border-b-2">Chức năng</th>
+          <th class="px-4 py-2 border-b-2">Quyền</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Quản lý người dùng -->
+        <tr>
+          <td class="px-4 py-2 border-b">Quản lý người dùng</td>
+          <td class="px-4 py-2 border-b">
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              <div class="flex items-center">
+                <input
+                id="1"
+                  type="checkbox"
+                  name="permissions"
+                  value="user.read"
+                  <%= isPermission(role.permissions, 'user.read') ? 'checked' : '' %>
+                  class="mr-2"
+                />
+                <label for="1">Xem</label>
+              </div>
+              <div class="flex items-center">
+                <input 
+                id="2"
+                  type="checkbox"
+                  name="permissions"
+                  value="user.create"
+                  <%= isPermission(role.permissions, 'user.create') ? 'checked' : '' %>
+                  class="mr-2"
+                />
+                <label for="2">Thêm</label>
+              </div>
+              <div class="flex items-center">
+                <input
+                id="3"
+                  type="checkbox"
+                  name="permissions"
+                  value="user.update"
+                  <%= isPermission(role.permissions, 'user.update') ? 'checked' : '' %>
+                  class="mr-2"
+                />
+                <label for="3">Sửa</label>
+              </div>
+              <div class="flex items-center">
+                <input
+                id="4"
+                  type="checkbox"
+                  name="permissions"
+                  value="user.delete"
+                  <%= isPermission(role.permissions, 'user.delete') ? 'checked' : '' %>
+                  class="mr-2"
+                />
+                <label for="4">Xóa</label>
+              </div>
+            </div>
+          </td>
+        </tr>
+
+        <!-- Quản lý vai trò -->
+        <tr>
+          <td class="px-4 py-2 border-b">Quản lý vai trò</td>
+          <td class="px-4 py-2 border-b">
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              <div class="flex items-center">
+                <input
+                id="5"
+                  type="checkbox"
+                  name="permissions"
+                  value="role.read"
+                  <%= isPermission(role.permissions, 'role.read') ? 'checked' : '' %>
+                  class="mr-2"
+                />
+                <label for="5">Xem</label>
+              </div>
+              <div class="flex items-center">
+                <input
+                id="6"
+                  type="checkbox"
+                  name="permissions"
+                  value="role.create"
+                  <%= isPermission(role.permissions, 'role.create') ? 'checked' : '' %>
+                  class="mr-2"
+                />
+                <label for="6">Thêm</label>
+              </div>
+              <div class="flex items-center">
+                <input
+                id="7"
+                  type="checkbox"
+                  name="permissions"
+                  value="role.update"
+                  <%= isPermission(role.permissions, 'role.update') ? 'checked' : '' %>
+                  class="mr-2"
+                />
+                <label for="7">Sửa</label>
+              </div>
+              <div class="flex items-center">
+                <input
+                id="8"
+                  type="checkbox"
+                  name="permissions"
+                  value="role.delete"
+                  <%= isPermission(role.permissions, 'role.delete') ? 'checked' : '' %>
+                  class="mr-2"
+                />
+                <label for="8">Xóa</label>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Nút Lưu và Hủy -->
+  <div class="flex space-x-4">
+    <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Lưu thay đổi</button>
+    <a href="/admin/v1/roles" class="px-6 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500">Hủy</a>
+  </div>
+</form>

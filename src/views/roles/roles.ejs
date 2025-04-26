@@ -1,0 +1,59 @@
+
+<%- include('../alerts/alerts.ejs') %>
+  
+  <div class="container mx-auto px-4">
+
+
+          <div class="md:col-span-2 bg-white p-6 rounded-lg shadow-md">
+              <h2 class="text-xl font-semibold mb-4">Danh sách Quyền</h2>
+              <table class="w-full border-collapse border border-gray-300 bg-white shadow">
+                  <thead>
+                      <tr class="bg-gray-200 text-gray-700">
+                          <th class="border border-gray-300 px-4 py-2">#</th>
+                          <th class="border border-gray-300 px-4 py-2">Tên Quyền</th>
+                          <th class="border border-gray-300 px-4 py-2">Mô Tả</th>
+                          <th class="border border-gray-300 px-4 py-2">Ngày Cấp</th>
+                          <th class="border border-gray-300 px-4 py-2 text-center">Chỉnh Sửa</th>
+                          <th class="border border-gray-300 px-4 py-2 text-center">Xóa</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    <% roles.forEach((role, index) => { %>
+                      <tr class="hover:bg-gray-100">
+                          <td class="border border-gray-300 px-4 py-2"><%= index+1 %></td>
+                          <td class="border border-gray-300 px-4 py-2"><%= role.name %></td>
+                          <td class="border border-gray-300 px-4 py-2">Thêm, sửa, xóa người dùng</td>
+                          <td class="border border-gray-300 px-4 py-2">01/04/2024</td>
+                          <td class="border border-gray-300 px-4 py-2 text-center">
+                            <a href="/admin/v1/roles/edit/<%= role.id %>" class="text-blue-500 hover:text-blue-700">
+                                <!-- SVG Icon Edit -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M17.414 2.586a2 2 0 0 1 0 2.828l-10 10a2 2 0 0 1-1.036.547l-4 1a1 1 0 0 1-1.242-1.242l1-4a2 2 0 0 1 .547-1.036l10-10a2 2 0 0 1 2.828 0zM15 5l-2-2-9.586 9.586a1 1 0 0 0-.293.707L3 16l2.707-.121a1 1 0 0 0 .707-.293L15 5z" />
+                                </svg>
+                            </a>
+                            
+                        </td>
+                        <td class="border border-gray-300 px-4 py-2 text-center">
+                            
+                            <form action="/admin/v1/roles/<%= role.id %>?_method=DELETE" method="post" onsubmit="return confirmDelete()">
+                                <button>
+                                    <svg fill="#af3131" class="h-5 w-5 inline-block text-red-400" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 408.483 408.483" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M87.748,388.784c0.461,11.01,9.521,19.699,20.539,19.699h191.911c11.018,0,20.078-8.689,20.539-19.699l13.705-289.316 H74.043L87.748,388.784z M247.655,171.329c0-4.61,3.738-8.349,8.35-8.349h13.355c4.609,0,8.35,3.738,8.35,8.349v165.293 c0,4.611-3.738,8.349-8.35,8.349h-13.355c-4.61,0-8.35-3.736-8.35-8.349V171.329z M189.216,171.329 c0-4.61,3.738-8.349,8.349-8.349h13.355c4.609,0,8.349,3.738,8.349,8.349v165.293c0,4.611-3.737,8.349-8.349,8.349h-13.355 c-4.61,0-8.349-3.736-8.349-8.349V171.329L189.216,171.329z M130.775,171.329c0-4.61,3.738-8.349,8.349-8.349h13.356 c4.61,0,8.349,3.738,8.349,8.349v165.293c0,4.611-3.738,8.349-8.349,8.349h-13.356c-4.61,0-8.349-3.736-8.349-8.349V171.329z"></path> <path d="M343.567,21.043h-88.535V4.305c0-2.377-1.927-4.305-4.305-4.305h-92.971c-2.377,0-4.304,1.928-4.304,4.305v16.737H64.916 c-7.125,0-12.9,5.776-12.9,12.901V74.47h304.451V33.944C356.467,26.819,350.692,21.043,343.567,21.043z"></path> </g> </g> </g></svg>
+                                </button>
+                            </form>
+                             
+                            <script>
+                                function confirmDelete() {
+                                  return confirm("Bạn có chắc chắn muốn xóa sản phẩm này?");
+                                }
+                              </script>
+                        </td>
+                      </tr>
+                      <% }) %>
+                      
+                  </tbody>
+              </table>
+
+        
+      </div>
+  </div>
+  

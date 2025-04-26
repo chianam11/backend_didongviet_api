@@ -1,0 +1,78 @@
+
+<%- include('../alerts/alerts.ejs') %>
+  
+  <div class="container mx-auto px-4">
+
+
+         
+
+          <!-- Form tạo quyền -->
+          <div class="bg-white p-6 rounded-lg shadow-md">
+              <h2 class="text-xl font-semibold mb-4 text-center">Tạo Quyền Mới</h2>
+              <form action="" method="post">
+                  <div class="mb-4">
+                      <label for="tenQuyen" class="block text-sm font-medium text-gray-700">Tên Quyền:<span class="text-red-400"><%= req.errors.name %></span></label>
+                     
+                      <input type="text" id="tenQuyen" placeholder="Nhập tên quyền" name="name"
+                          class="mt-1 block w-full p-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 outline-none">
+                  </div>
+
+                  <div class="mb-4">
+                      <label for="moTa" class="block text-sm font-medium text-gray-700">Mô Tả</label>
+                      <textarea id="moTa" placeholder="Nhập mô tả quyền" rows="3" name="description"
+                          class="mt-1 block w-full p-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 outline-none"></textarea>
+                  </div>
+
+                  <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700">Quản lý người dùng</label>
+                    <div class="flex flex-wrap gap-4 mt-2">
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" class="form-checkbox text-blue-600" value="user.read" name="permissions">
+                            <span class="ml-2">Xem</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" class="form-checkbox text-blue-600" value="user.create" name="permissions">
+                            <span class="ml-2">Thêm </span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" class="form-checkbox text-blue-600" value="user.update" name="permissions">
+                            <span class="ml-2">Sửa</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" class="form-checkbox text-blue-600" value="user.delete" name="permissions">
+                            <span class="ml-2">Xóa</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="mb-4">
+                  <label class="block text-sm font-medium text-gray-700">Quản lý vai trò</label>
+                  <div class="flex flex-wrap gap-4 mt-2">
+                      <label class="inline-flex items-center">
+                          <input type="checkbox" class="form-checkbox text-blue-600" value="role.read" name="permissions">
+                          <span class="ml-2">Xem</span>
+                      </label>
+                      <label class="inline-flex items-center">
+                          <input type="checkbox" class="form-checkbox text-blue-600" value="role.create" name="permissions">
+                          <span class="ml-2">Thêm </span>
+                      </label>
+                      <label class="inline-flex items-center">
+                          <input type="checkbox" class="form-checkbox text-blue-600" value="role.update" name="permissions"> 
+                          <span class="ml-2">Sửa</span>
+                      </label>
+                      <label class="inline-flex items-center">
+                          <input type="checkbox" class="form-checkbox text-blue-600" value="role.delete" name="permissions">
+                          <span class="ml-2">Xóa</span>
+                      </label>
+                  </div>
+              </div>
+                 
+
+                  <button type="submit"
+                      class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
+                      Tạo Quyền
+                  </button>
+              </form>
+          </div>
+
+  </div>
+  

@@ -1,0 +1,60 @@
+<% if (typeof nav !== 'undefined' && nav === true) { %>
+    <nav class="bg-white shadow-md mb-8">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="/">
+                <svg fill="#000000" height="30px" width="30px" viewBox="0 0 330 330">
+                    <path d="M165,0C74.019,0,0,74.019,0,165s74.019,165,165,165s165-74.019,165-165S255.981,0,165,0z M205.606,234.394 
+                        c5.858,5.857,5.858,15.355,0,21.213C202.678,258.535,198.839,260,195,260s-7.678-1.464-10.606-4.394l-80-79.998 
+                        c-2.813-2.813-4.394-6.628-4.394-10.606c0-3.978,1.58-7.794,4.394-10.607l80-80.002c5.857-5.858,15.355-5.858,21.213,0 
+                        c5.858,5.857,5.858,15.355,0,21.213l-69.393,69.396L205.606,234.394z">
+                    </path>
+                </svg>
+            </a>
+    
+            <!-- Menu Items -->
+            <ul class="hidden md:flex space-x-6">
+                <% if (typeof categories !== 'undefined' && categories && categories.length) { %>
+                    <% categories.forEach(category => { %>
+                        <li>
+                            <a href="<%= category[1] %>" class="text-gray-700 hover:text-indigo-600">
+                                <%= category[0] %>
+                            </a>
+                        </li>
+                    <% }); %>
+                <% } else { %>
+                <% } %>
+            </ul>
+    
+            <!-- Mobile Menu Button -->
+            <button id="menu-btn" class="md:hidden focus:outline-none">
+                <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+    
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+            <ul class="space-y-2 py-2">
+                <% if (typeof categories !== 'undefined' && categories && categories.length) { %>
+                    <% categories.forEach(category => { %>
+                        <li>
+                            <a href="<%= category[1] %>" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                                <%= category[0] %>
+                            </a>
+                        </li>
+                    <% }); %>
+                <% } else { %>
+                <% } %>
+            </ul>
+        </div>
+    
+        <script>
+            document.getElementById('menu-btn').addEventListener('click', function () {
+                document.getElementById('mobile-menu').classList.toggle('hidden');
+            });
+        </script>
+    </nav>
+    <% } %>
+    

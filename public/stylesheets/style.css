@@ -1,0 +1,107 @@
+/* Flexbox layout */
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.items-center {
+  display: flex;
+  align-items: center;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.checkbox-style {
+  margin-right: 1rem;
+  height: 1.5rem;
+  width: 1.5rem;
+  cursor: pointer;
+}
+  
+.label-style {
+  flex-basis: 20%; /* Label chiếm 20% diện tích */
+  max-width: 20%;
+  text-align: left;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-left: 0.5rem;
+}
+
+.content {
+  flex-basis: 80%; /* Nội dung chiếm 80% diện tích */
+  max-width: 80%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* Đảm bảo nội dung được ẩn ban đầu */
+.hidden {
+  display: none;
+}
+
+/* Hiển thị nội dung khi checkbox được chọn */
+input[type="checkbox"]:checked + label + .content {
+  display: block;
+}
+
+/* General styles */
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.py-8 {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.text-gray-800 {
+  color: #1f2937;
+}
+
+.bg-white {
+  background-color: #ffffff;
+}
+
+.border {
+  border-width: 1px;
+}
+
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+
+.dark\\:bg-gray-700 {
+  background-color: #374151;
+}
+
+.dark\\:border-gray-600 {
+  border-color: #4b5563;
+}
+
+.dark\\:text-white {
+  color: #ffffff;
+}

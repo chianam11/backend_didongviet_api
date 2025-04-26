@@ -1,0 +1,153 @@
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full ">
+        <h2 class="text-2xl font-semibold text-center text-gray-800 mb-4">Chỉnh Sửa Sản Phẩm</h2>
+        
+        <form action="/products/edit/<%= productData.id %>" method="POST" enctype="multipart/form-data" class="space-y-4">
+            <div>
+                <label for="name" class="block font-medium text-gray-700">Tên sản phẩm:</label>
+                <input type="text" id="name" name="name" value="<%= productData.name %>" required 
+                    class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+
+            <div>
+                <label for="description" class="block font-medium text-gray-700">Mô tả:</label>
+                <textarea id="description" name="description" required 
+                    class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"><%= productData.description %></textarea>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label for="price" class="block font-medium text-gray-700">Giá:</label>
+                    <input type="number" id="price" name="price" value="<%= productData.price %>" required 
+                        class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+
+                <div>
+                    <label for="stock" class="block font-medium text-gray-700">Số lượng:</label>
+                    <input type="number" id="stock" name="stock" value="<%= productData.stock %>" required 
+                        class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+            </div>
+
+            <div>
+                <label for="category_id" class="block font-medium text-gray-700">Danh mục:</label>
+                <select id="category_id" name="category_id" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <% categoryData.forEach(category => { %>
+                        <option value="<%= category.id %>" <%= category.id === productData.category_id ? 'selected' : '' %>>
+                            <%= category.name %>
+                        </option>
+                    <% }) %>
+                </select>
+            </div>
+
+            <div>
+                <label for="brand_id" class="block font-medium text-gray-700">Thương hiệu:</label>
+                <select id="brand_id" name="brand_id" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <% brandData.forEach(brand => { %>
+                        <option value="<%= brand.id %>" <%= brand.id === productData.brand_id ? 'selected' : '' %>>
+                            <%= brand.name %>
+                        </option>
+                    <% }) %>
+                </select>
+            </div>
+
+         <!-- Ảnh chính sản phẩm -->
+<div>
+    <label class="block text-sm font-medium text-gray-700 mb-1">Ảnh chính sản phẩm</label>
+    <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md relative">
+        <img src="<%= avt %>" alt="avatar" 
+             class="w-48 h-48 object-cover rounded-md mx-auto cursor-pointer" 
+             onclick="openModal('<%= avt %>')">
+        
+        <!-- Nút Xóa ảnh chính -->
+        <button type="button" class="absolute top-2 right-2 bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center shadow-md hover:bg-red-700"
+            onclick="removeMainImage()">
+            ✖
+        </button>
+    </div>
+
+    <div class="flex text-sm flex-col text-gray-600 mt-4 text-center">
+        <label class="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500">
+            <span>Upload a file</span>
+            <input name="product_image" type="file" accept="image/*" required class="hidden"/>
+        </label>
+    </div>
+</div>
+
+<!-- Ảnh phụ sản phẩm -->
+<div>
+    <label class="block text-sm font-medium text-gray-700 mb-1">Ảnh phụ sản phẩm</label>
+    <div class="mt-1 justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+        <div class="flex flex-wrap gap-x-4 gap-y-2 justify-center">
+            <% images.forEach((url, index) => { %>
+                <div class="relative">
+                    <img src="<%= url %>" alt="avatar" class="w-32 h-32 object-cover rounded-md cursor-pointer" 
+                         onclick="openModal('<%= url %>')">
+                    <!-- Nút Xóa -->
+                    <button type="button" class="absolute top-0 right-0 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center shadow-md hover:bg-red-700"
+                        onclick="removeImage(<%= index %>)">
+                        ✖
+                    </button>
+                </div>
+            <% }) %>
+        </div>
+
+        <div class="flex text-sm flex-col text-gray-600 mt-4 text-center">
+            <label class="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500">
+                <span>Upload a file</span>
+                <input name="product_images" type="file" accept="image/*" required class="hidden"/>
+            </label>
+        </div>
+    </div>
+</div>
+
+<!-- Modal xem ảnh kích thước gốc -->
+<div id="imageModal" class="fixed inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm hidden">
+    <div class="relative">
+        <img id="modalImage" src="" alt="Ảnh gốc" class="max-w-full max-h-screen rounded-md">
+        <button type="button" class="absolute top-2 right-2 bg-gray-700 text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-gray-900"
+            onclick="closeModal()">
+            ✖
+        </button>
+    </div>
+</div>
+
+<script>
+    function openModal(imageUrl) {
+        document.getElementById('modalImage').src = imageUrl;
+        document.getElementById('imageModal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+        document.getElementById('imageModal').classList.add('hidden');
+    }
+
+    function removeMainImage() {
+        
+          
+if(confirm("Bạn chắc chắn muốn xóa ảnh này?")){
+document.querySelector('img[alt="avatar"]').remove();
+alert("Đã xóa thành công")
+}
+        
+    }
+
+    function removeImage(index) {
+        if(confirm("Bạn chắc chắn muốn xóa ảnh này?")){
+document.querySelector('img[alt="avatar"]').remove();
+alert("Đã xóa thành công")
+}
+    }
+</script>
+
+            
+            </div>
+            
+
+            <div class="flex justify-between items-center">
+                <a href="/products" class="text-gray-600 hover:text-gray-900">Quay lại</a>
+                <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">
+                    Lưu Thay Đổi
+                </button>
+            </div>
+        </form>
+    </div>
