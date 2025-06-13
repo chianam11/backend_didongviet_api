@@ -1,31 +1,49 @@
-
 require("dotenv").config();
-const { DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_PORT, DB_DIALECT } =
-  process.env;
+const pg = require("pg");
 module.exports = {
   development: {
-    "username": DB_USERNAME,
-    "password": DB_PASSWORD,
-    "database": DB_DATABASE,
-    "host": DB_HOST,
-    "port": DB_PORT,
-    "dialect": DB_DIALECT,
-    logger: false
+    username: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE,
+    host: process.env.DB_HOST,
+    dialect: process.env.DB_DRIVER || "postgres",
+    port: process.env.DB_PORT || 5432,
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false
+      }
+    },
+    dialectModule: pg,
   },
   test: {
-    "username": DB_USERNAME,
-    "password": DB_PASSWORD,
-    "database": DB_DATABASE,
-    "host": DB_HOST,
-    "port": DB_PORT,
-    "dialect": DB_DIALECT
+    username: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE,
+    host: process.env.DB_HOST,
+    dialect: process.env.DB_DRIVER || "postgres",
+    port: process.env.DB_PORT || 5432,
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false
+      }
+    },
+    dialectModule: pg,
   },
   production: {
-    "username": DB_USERNAME,
-    "password": DB_PASSWORD,
-    "database": DB_DATABASE,
-    "host": DB_HOST,
-    "port": DB_PORT,
-    "dialect": DB_DIALECT
+    username: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE,
+    host: process.env.DB_HOST,
+    dialect: process.env.DB_DRIVER || "postgres",
+    port: process.env.DB_PORT || 5432,
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false
+      }
+    },
+    dialectModule: pg,
   },
 };

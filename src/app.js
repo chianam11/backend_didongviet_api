@@ -104,7 +104,9 @@ app.use("/v1", validate, sanitizeMiddleware);
 usersRouter(app);
 rolesRouter(app);
 productRouter(app);
-
+app.use("/hello", (req, res) => {
+  res.json("hello")
+})
 // === XỬ LÝ LỖI 404 ===
 app.use((req, res, next) => {
   res.status(404).render("notFound", { layout: false });
