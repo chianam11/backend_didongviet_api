@@ -44,7 +44,6 @@ module.exports = {
         }
     },
     phoneDetailBySlug: async (req, res) => {
-        console.log("helloooooo");
 
 
         try {
@@ -76,5 +75,53 @@ module.exports = {
             return res.status(500).json({ message: 'Internal server error' });
         }
     }
+    ,
+    batchProduct: async (req, res) => {
+        const { items } = req.body; // mảng [{slug, quantity}, ...]
+        console.log("items: ", items);
+
+        if (!Array.isArray(items) || items.length === 0) {
+            return res.status(400).json({ error: "Missing items array" });
+        }
+
+        try {
+            // Lấy mảng slug để truy vấn DB
+            const slugs = items.map(item => item.slug);
+
+            // Lấy tất cả sản phẩm theo slug
+            const products = await Product.findAll({
+                where: { slug: slugs },
+            });
+
+            // Map slug -> quantity cho dễ lookup
+            const quantityMap = {};
+            items.forEach(({ slug, quantity }) => {
+                quantityMap[slug] = quantity;
+            });
+
+            // Ghép sản phẩm với số lượng và tính totalPrice từng sản phẩm
+            const productsWithQuantity = products.map(product => {
+                const quantity = quantityMap[product.slug] || 0;
+                const totalPrice = product.price * quantity;
+                return {
+                    ...product.toJSON(),
+                    quantity,
+                    totalPrice,
+                };
+            });
+
+            // (Tuỳ chọn) Tính tổng tiền toàn bộ đơn hàng
+            const totalOrderPrice = productsWithQuantity.reduce((sum, p) => sum + p.totalPrice, 0);
+
+            res.json({
+                products: productsWithQuantity,
+                totalOrderPrice,
+            });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: "Server error" });
+        }
+    }
+
 
 };
