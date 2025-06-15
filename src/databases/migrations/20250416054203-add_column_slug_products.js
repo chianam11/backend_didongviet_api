@@ -5,7 +5,8 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.addColumn("products", "slug", {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: false,
+      unique: true,
 
     });
   },
