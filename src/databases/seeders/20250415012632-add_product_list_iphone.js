@@ -116,20 +116,29 @@ module.exports = {
 
     console.log("🔍 Kiểm tra và thêm brands nếu thiếu...");
     for (const [brand, id] of Object.entries(brandMap)) {
-      const brandExists = await queryInterface.sequelize.query(
-        `SELECT COUNT(*) FROM brands WHERE id = :id`,
-        { replacements: { id }, type: Sequelize.QueryTypes.SELECT }
+      const [results] = await queryInterface.sequelize.query(
+        `SELECT COUNT(*) as count FROM brands WHERE name = :name`,
+        {
+          replacements: { name: brand },
+          type: Sequelize.QueryTypes.SELECT,
+        }
       );
-      if (parseInt(brandExists[0].count) === 0) {
-        await queryInterface.bulkInsert("brands", [{
-          id,
-          name: brand,
-          description: `Thương hiệu ${brand}`,
-          logo_url: "default_logo_url",
-          website_url: "default_website_url",
-          created_at: new Date(),
-          updated_at: new Date(),
-        }]);
+
+      if (parseInt(results.count) === 0) {
+        await queryInterface.bulkInsert("brands", [
+          {
+            id,
+            name: brand,
+            description: `Thương hiệu ${brand}`,
+            logo_url: "default_logo_url",
+            website_url: "default_website_url",
+            created_at: new Date(),
+            updated_at: new Date(),
+          },
+        ]);
+        console.log(`➕ Đã thêm brand mới: ${brand}`);
+      } else {
+        console.log(`✅ Brand đã tồn tại, bỏ qua: ${brand}`);
       }
     }
 
