@@ -1,5 +1,4 @@
 'use strict';
-
 module.exports = {
     async up(queryInterface, Sequelize) {
         const [products] = await queryInterface.sequelize.query(`SELECT id FROM products;`);
