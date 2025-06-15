@@ -3,66 +3,7 @@ const { Sequelize, QueryInterface } = require("sequelize");
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert("categories", [
-      // {
-      //   name: "Smartphones",
-      //   description: "All kinds of smartphones from various brands.",
-      //   created_at: new Date(),
-      //   updated_at: new Date(),
-      // },
-      // {
-      //   name: "Laptops",
-      //   description: "Personal and business laptops from top manufacturers.",
-      //   created_at: new Date(),
-      //   updated_at: new Date(),
-      // },
-      // {
-      //   name: "Tablets",
-      //   description: "Portable touchscreen devices for work and entertainment.",
-      //   created_at: new Date(),
-      //   updated_at: new Date(),
-      // },
-      // {
-      //   name: "Smartwatches",
-      //   description: "Wearable devices with smart features and health tracking.",
-      //   created_at: new Date(),
-      //   updated_at: new Date(),
-      // },
-      // {
-      //   name: "Accessories",
-      //   description: "Chargers, cases, headphones, and other tech accessories.",
-      //   created_at: new Date(),
-      //   updated_at: new Date(),
-      // },
-      // {
-      //   name: "Gaming",
-      //   description: "Gaming consoles, PCs, and accessories for gamers.",
-      //   created_at: new Date(),
-      //   updated_at: new Date(),
-      // },
-      // {
-      //   name: "Monitors",
-      //   description: "High-resolution monitors for work and gaming.",
-      //   created_at: new Date(),
-      //   updated_at: new Date(),
-      // },
-      // {
-      //   name: "PC Components",
-      //   description: "Graphic cards, RAM, motherboards, and other PC parts.",
-      //   created_at: new Date(),
-      //   updated_at: new Date(),
-      // },
-      // {
-      //   name: "Networking Devices",
-      //   description: "Routers, modems, and network extenders.",
-      //   created_at: new Date(),
-      //   updated_at: new Date(),
-      // },
-      // {
-      //   name: "Printers & Scanners",
-      //   description: "Devices for printing and scanning documents and photos.",
-      //   created_at: new Date(),
-      //   updated_at: new Date(),
-      // },
+
       {
         name: "Điện thoại",
         description: "Các dòng điện thoại thông minh từ nhiều thương hiệu.",
