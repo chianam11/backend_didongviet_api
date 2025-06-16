@@ -72,19 +72,30 @@ passport.deserializeUser(async (id, done) => {
 });
 
 // === CẤU HÌNH CORS ===
-const { CLIENT, SERVER } = process.env;
-const whitelist = [CLIENT, SERVER].filter(Boolean); // loại bỏ giá trị undefined
+const { CLIENT, SERVER, NODE_ENV } = process.env;
+
+const whitelist = [CLIENT, SERVER].filter(Boolean); // loại bỏ undefined hoặc chuỗi rỗng
+
 const corsOptions = {
   origin: function (origin, callback) {
-    if (!origin || whitelist.includes(origin)) {
+    // Nếu đang ở môi trường development → cho phép mọi origin
+    if (NODE_ENV === 'development') {
       callback(null, true);
-    } else {
+    }
+    // Nếu không có origin (ví dụ như từ Postman) → cho phép
+    else if (!origin || whitelist.includes(origin)) {
+      callback(null, true);
+    }
+    // Ngược lại, chặn CORS
+    else {
       callback(new Error("Not allowed by CORS"));
     }
   },
   credentials: true,
 };
+
 app.use(cors(corsOptions));
+
 
 // === ROUTES ===
 
