@@ -1,9 +1,7 @@
 const { Sequelize, QueryInterface } = require("sequelize");
-
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert("categories", [
-
       {
         name: "Điện thoại",
         description: "Các dòng điện thoại thông minh từ nhiều thương hiệu.",
