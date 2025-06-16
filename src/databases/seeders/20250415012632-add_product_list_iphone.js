@@ -127,7 +127,7 @@ module.exports = {
       if (parseInt(results.count) === 0) {
         await queryInterface.bulkInsert("brands", [
           {
-            id,
+
             name: brand,
             description: `Thương hiệu ${brand}`,
             logo_url: "default_logo_url",

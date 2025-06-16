@@ -5,7 +5,6 @@ module.exports = {
         const [tags] = await queryInterface.sequelize.query(`SELECT id FROM product_tags;`);
 
         const productTagMappings = [];
-
         for (const product of products) {
             // Chọn ngẫu nhiên 2 đến 3 tag cho mỗi product
             const shuffled = tags.sort(() => 0.5 - Math.random());
