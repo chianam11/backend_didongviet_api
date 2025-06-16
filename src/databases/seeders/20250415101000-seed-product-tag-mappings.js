@@ -6,7 +6,6 @@ module.exports = {
 
         const productTagMappings = [];
         for (const product of products) {
-            // Chọn ngẫu nhiên 2 đến 3 tag cho mỗi product
             const shuffled = tags.sort(() => 0.5 - Math.random());
             const selectedTags = shuffled.slice(0, Math.floor(Math.random() * 2) + 2); // 2~3 tags
 
@@ -22,7 +21,6 @@ module.exports = {
 
         await queryInterface.bulkInsert('product_tag_mappings', productTagMappings, {});
     },
-
     async down(queryInterface) {
         await queryInterface.bulkDelete('product_tag_mappings', null, {});
     }
