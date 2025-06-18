@@ -95,18 +95,20 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-
+app.use("/no-sleep", (req, res) => {
+  return res.json("ok").status(200)
+})
 
 // === ROUTES ===
 
 // Trang chính (Client-side render với EJS)
-app.use("/", indexRouter);
 
 // API Client (ví dụ: /api/products)
 clientApi(app);
 
 // Auth routes (không cần middleware bảo vệ)
 authentication(app);
+app.use("/", indexRouter);
 
 // Middleware validate & sanitize chỉ cho API
 app.use("/v1", validate, sanitizeMiddleware);
