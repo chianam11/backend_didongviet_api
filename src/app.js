@@ -101,9 +101,7 @@ app.use("/no-sleep", (req, res) => {
 
 // === ROUTES ===
 
-// Trang chính (Client-side render với EJS)
 
-// API Client (ví dụ: /api/products)
 clientApi(app);
 
 // Auth routes (không cần middleware bảo vệ)
