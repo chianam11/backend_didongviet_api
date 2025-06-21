@@ -43,7 +43,6 @@ module.exports = {
   handleDelete: async (req, res) => {
     try {
       const { id } = req.params;
-      console.log(id);
 
       const role = await Role.findByPk(id, {
         include: [
@@ -159,7 +158,6 @@ module.exports = {
     // Kiểm tra dữ liệu trả về
     const checkrole = JSON.stringify(roleData, null, 2) // Dễ dàng xem dữ liệu trả về
     const role = JSON.parse(checkrole);
-    console.log(role);
 
     res.render("roles/edit", {
       role, isPermission,

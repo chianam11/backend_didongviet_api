@@ -28,7 +28,6 @@ module.exports = {
                   const { id } = req.params;
 
                   const user = await User.findByPk(id);
-                  console.log(user);
 
                   await user.destroy();
                   req.flash("success", "Xóa người dùng thành công")
@@ -36,7 +35,6 @@ module.exports = {
 
             } catch (e) {
                   req.flash("error", "Xóa người dùng thất bại vui lòng thử lại sau!")
-                  console.log(e);
 
             }
 

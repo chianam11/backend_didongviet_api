@@ -14,7 +14,6 @@ module.exports = {
       const host = req.baseUrl;
 
       const products = await productServices.getProducts();
-      console.log("env ===================> ", process.env.HOST, "=======", req.baseUrl);
 
       res.render("products/products", {
         req,
@@ -85,7 +84,6 @@ module.exports = {
       const categoryData = categories.map(category => category.get({ plain: true }));
 
       const host = req.baseUrl;
-      console.log("env ===================> ", process.env.HOST, "=======", req.baseUrl);
 
       res.render("products/createProduct", {
         successMessage,
@@ -218,7 +216,6 @@ module.exports = {
       const images = productData.images.map(({ image_url }) => {
         return baseUrl + "/images/products/" + image_url;
       });
-      console.log("env ===================> ", process.env.PORT, "=======", req.baseUrl);
 
       res.render("products/edit", {
         successMessage,

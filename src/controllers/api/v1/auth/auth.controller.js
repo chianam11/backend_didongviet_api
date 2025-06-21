@@ -6,8 +6,6 @@ module.exports = {
     login: async (req, res) => {
         try {
             const { username, password } = req.body;
-            console.log("hello");
-            console.log(username, password);
 
             // Kiểm tra thiếu trường
             if (!username || !password) {
@@ -57,7 +55,6 @@ module.exports = {
         }
     },
     profile: async (req, res) => {
-        console.log(req.user, 111);
 
         return successResponse(res, 200, "Success", req.user);
     },

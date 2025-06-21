@@ -48,7 +48,6 @@ module.exports = {
 
         try {
             const { slug } = req.params;
-            console.log("slug: ", slug);
             const product = await Product.findOne({
                 where: { slug },
                 include: [
@@ -65,7 +64,6 @@ module.exports = {
                     }
                 ],
             });
-            console.log("Hellooooooo: ", product);
 
             if (!product) return res.status(404).json({ message: 'Product not found' });
 
@@ -78,7 +76,6 @@ module.exports = {
     ,
     batchProduct: async (req, res) => {
         const { items } = req.body; // mảng [{slug, quantity}, ...]
-        console.log("items: ", items);
 
         if (!Array.isArray(items) || items.length === 0) {
             return res.status(400).json({ error: "Missing items array" });
