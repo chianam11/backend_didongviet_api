@@ -93,7 +93,6 @@ const corsOptions = {
   },
   credentials: true,
 };
-
 app.use(cors(corsOptions));
 app.use("/no-sleep", (req, res) => {
   return res.json("ok").status(200)
