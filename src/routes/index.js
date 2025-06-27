@@ -10,5 +10,4 @@ router.get('/', function (req, res, next) {
 
   res.render("index", { successMessage, errorElements, errorMessage, warningMessage })
 });
-
 module.exports = router;
