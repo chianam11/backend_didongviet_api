@@ -54,6 +54,31 @@ module.exports = {
             return errorResponse(res, 500, "Internal server error");
         }
     },
+    register: async (req, res) => {
+        try {
+            const { name, username, password, confirmPassword } = req.body;
+
+            const user = await User.findOne({ where: { username } });
+            if (user) {
+                return errorResponse(res, 400, "Username already exists");
+            }
+            if (password !== confirmPassword) {
+                return errorResponse(res, 400, "Passwords do not match");
+            }
+            const hashedPassword = await bcrypt.hash(password, 10);
+            const newUser = await User.create({
+                name,
+                username,
+                password: hashedPassword,
+            });
+            return successResponse(res, 200, "ok");
+
+        } catch (e) {
+            console.error("Register error:", e);
+            return errorResponse(res, 500, "Internal server error");
+        }
+
+    },
     profile: async (req, res) => {
 
         return successResponse(res, 200, "Success", req.user);
