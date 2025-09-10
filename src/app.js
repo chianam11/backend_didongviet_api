@@ -54,7 +54,6 @@ app.use(
   })
 );
 app.use(flash());
-
 // === CẤU HÌNH PASSPORT ===
 app.use(passport.initialize());
 app.use(passport.session());
@@ -70,12 +69,9 @@ passport.deserializeUser(async (id, done) => {
     done(err, null);
   }
 });
-
 // === CẤU HÌNH CORS ===
 const { CLIENT, SERVER, NODE_ENV } = process.env;
-
 const whitelist = [CLIENT, SERVER].filter(Boolean); // loại bỏ undefined hoặc chuỗi rỗng
-
 const corsOptions = {
   origin: function (origin, callback) {
     // Nếu đang ở môi trường development → cho phép mọi origin
@@ -97,29 +93,21 @@ app.use(cors(corsOptions));
 app.use("/no-sleep", (req, res) => {
   return res.json("ok").status(200)
 })
-
 // === ROUTES ===
-
-
 clientApi(app);
-
 // Auth routes (không cần middleware bảo vệ)
 authentication(app);
 app.use("/", indexRouter);
-
 // Middleware validate & sanitize chỉ cho API
 app.use("/v1", validate, sanitizeMiddleware);
-
 // Các route cần bảo vệ bằng authMiddleware
 usersRouter(app);
 rolesRouter(app);
 productRouter(app);
-
 // === XỬ LÝ LỖI 404 ===
 app.use((req, res, next) => {
   res.status(404).render("notFound", { layout: false });
 });
-
 // === XỬ LÝ LỖI CHUNG ===
 app.use((err, req, res, next) => {
   res.locals.message = err.message;
@@ -127,5 +115,4 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500);
   res.json({ error: err.message });
 });
-
 module.exports = app;
